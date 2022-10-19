@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Win({leaderBoard}) {
+function Win({stateMutate}) {
   return (
     <div>
         <h1>Win</h1>
-        <button onClick={leaderBoard}>Leaderboard</button>
+        <button onClick={() => stateMutate("LEADER")}>Leaderboard</button>
     </div>
   )
 }

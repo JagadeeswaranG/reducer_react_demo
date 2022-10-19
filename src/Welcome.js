@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Welcome({gameStart}) {
+function Welcome({stateMutate}) {
   return (
     <div>
         <h1>Welcome</h1>
-        <button onClick={gameStart}>start</button>
+        <button onClick={() => stateMutate("GAME")}>start</button>
     </div>
   )
 }

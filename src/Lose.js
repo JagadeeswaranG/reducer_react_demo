@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Lose({gameStart}) {
+function Lose({stateMutate}) {
   return (
     <div>
         <h1>Lose</h1>
-        <button onClick={gameStart}>Start Again</button>
+        <button onClick={() => stateMutate("GAME")}>Start Again</button>
     </div>
   )
 }

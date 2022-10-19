@@ -1,56 +1,50 @@
-import './App.css';
-import { useState } from 'react';
-import Welcome from './Welcome';
-import Game from './Game';
-import Win from './Win';
-import Lose from './Lose';
-import Leader from './Leader';
+import React, { useReducer } from "react";
+import "./App.css";
+import Game from "./Game";
+import Leader from "./Leader";
+import Lose from "./Lose";
+import Welcome from "./Welcome";
+import Win from "./Win";
 
+function reducer(state, action) {
+  switch (action.type) {
+    case "WELCOME":
+      return {
+        ui: "WELCOME",
+      };
+    case "GAME":
+      return {
+        ui: "GAME",
+      };
+    case "WIN":
+      return {
+        ui: "WIN",
+      };
+    case "LEADER":
+      return {
+        ui: "LEADER",
+      };
+    case "LOSE":
+      return {
+        ui: "LOSE",
+      };
+
+    default:
+      return state;
+  }
+}
 function App() {
-  const [welcome,setWelcome] = useState(true)
-  const [game,setGame] = useState(false)
-  const [win,setWin] = useState(false)
-  const [lose,setLose] = useState(false)
-  const [leader,setLeader] = useState(false)
-
-  let gameStart = () =>{
-    setGame(true)
-    setWelcome(false)
-    setLeader(false)
-    setLose(false)
-  }
-
-  let gameWin = () =>{
-    setWin(true)
-    setGame(false)
-  }
-  
-  let gameLose = () =>{
-    setLose(true)
-    setGame(false)
-  } 
-
-  let leaderBoard = () =>{
-    setLeader(true)
-    setWin(false)
-  }
+  const [state, dispatch] = useReducer(reducer, { ui: "WELCOME" });
+  let stateMutate = (action) => {
+    dispatch({ type: action });
+  };
   return (
     <div className="App">
-      {
-        welcome ? <Welcome gameStart={gameStart}/> : null
-      }
-      {
-        game ? <Game gameWin={gameWin} gameLose={gameLose}/> : null
-      }
-      {
-        win ? <Win leaderBoard={leaderBoard}/> : null
-      }
-      {
-        lose ? <Lose gameStart={gameStart}/> : null
-      }
-      {
-        leader ? <Leader gameStart={gameStart}/> : null
-      }
+      {state.ui === "WELCOME" ? <Welcome stateMutate={stateMutate} /> : null}
+      {state.ui === "GAME" ? <Game stateMutate={stateMutate} /> : null}
+      {state.ui === "WIN" ? <Win stateMutate={stateMutate} /> : null}
+      {state.ui === "LOSE" ? <Lose stateMutate={stateMutate} /> : null}
+      {state.ui === "LEADER" ? <Leader stateMutate={stateMutate} /> : null}
     </div>
   );
 }

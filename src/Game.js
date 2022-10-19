@@ -1,11 +1,11 @@
 import React from 'react'
 
-function Game({gameWin,gameLose}) {
+function Game({stateMutate}) {
   return (
     <div>
         <h1>Game</h1>
-        <button onClick={gameWin}>Win</button>
-        <button onClick={gameLose}>Lose</button>
+        <button onClick={() => stateMutate("LEADER")}>Win</button>
+        <button onClick={() => stateMutate("LOSE")}>Lose</button>
     </div>
   )
 }
